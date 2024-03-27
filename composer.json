@@ -21,7 +21,7 @@
   ],
   "require": {
     "php":"^8.2",
-    "illuminate/collections": "^10.0||^11.0",
+    "laravel/framework": ">=9",
     "guzzlehttp/guzzle": "^7.0",
     "symfony/http-client": "^6.4||^7.0"
   },
