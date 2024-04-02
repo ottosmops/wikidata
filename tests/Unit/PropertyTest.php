@@ -10,7 +10,7 @@ class PropertyTest extends TestCase
 
   public function setUp(): void
   {
-    $this->property = new Property($this->dummyProperties);
+    $this->property = new Property(collect($this->dummyProperties));
   }
 
   public function testGetPropertyId()

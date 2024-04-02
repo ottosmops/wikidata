@@ -10,22 +10,22 @@ class Entity
   /**
    * @var string Entity Id
    */
-  public $id;
+  public string $id;
 
   /**
    * @var string Entity language
    */
-  public $lang;
+  public string $lang;
 
   /**
    * @var string Entity label
    */
-  public $label;
+  public string $label;
 
   /**
    * @var string A link to a Wikipedia article about this entity
    */
-  public $wiki_url = null;
+  public string $wiki_url = '';
 
   /**
    * @var string[] List of entity aliases
@@ -43,7 +43,7 @@ class Entity
    * @param array $data
    * @param string $lang
    */
-  public function __construct($data, $lang)
+  public function __construct(array $data, string $lang)
   {
     $this->lang = $lang;
     $this->properties = new Collection();
@@ -55,15 +55,15 @@ class Entity
    *
    * @param array $data
    */
-  private function parseData($data)
+  private function parseData(array $data)
   {
     $lang = $this->lang;
     $site = $lang . 'wiki';
 
     $this->id = $data['id'];
-    $this->label = isset($data['labels'][$lang]) ? $data['labels'][$lang]['value'] : null;
-    $this->description = isset($data['descriptions'][$lang]) ? $data['descriptions'][$lang]['value'] : null;
-    $this->wiki_url = isset($data['sitelinks'][$site]) ? $data['sitelinks'][$site]['url'] : null;
+    $this->label = isset($data['labels'][$lang]) ? $data['labels'][$lang]['value'] : '';
+    $this->description = isset($data['descriptions'][$lang]) ? $data['descriptions'][$lang]['value'] : '';
+    $this->wiki_url = isset($data['sitelinks'][$site]) ? $data['sitelinks'][$site]['url'] : '';
     $this->aliases = isset($data['aliases'][$lang]) ? collect($data['aliases'][$lang])->pluck('value')->toArray() : [];
   }
 

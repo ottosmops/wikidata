@@ -3,6 +3,7 @@
 namespace Wikidata;
 
 use Wikidata\Value;
+use Illuminate\Support\Collection;
 
 class Property
 {
@@ -22,9 +23,9 @@ class Property
   public $values;
 
   /**
-   * @param array $data
+   * @param Collection $data
    */
-  public function __construct($data)
+  public function __construct(Collection $data)
   {
     $this->parseData($data);
   }
@@ -32,11 +33,11 @@ class Property
   /**
    * Parse input data
    *
-   * @param array $data
+   * @param Collection $data
    */
-  private function parseData($data)
+  private function parseData(Collection $data) : void
   {
-    $grouped = collect($data)->groupBy('statement');
+    $grouped = $data->groupBy('statement');
     $flatten = $grouped->flatten(1);
 
     $this->id = get_id($flatten[0]['prop']);

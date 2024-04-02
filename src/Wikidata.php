@@ -3,10 +3,11 @@
 namespace Wikidata;
 
 use Exception;
-use Wikidata\ApiClient;
 use Wikidata\Entity;
+use Wikidata\ApiClient;
 use Wikidata\SearchResult;
 use Wikidata\SparqlClient;
+use Illuminate\Support\Collection;
 
 class Wikidata
 {
@@ -19,7 +20,7 @@ class Wikidata
    *
    * @return \Illuminate\Support\Collection Return collection of \Wikidata\SearchResult
    */
-  public function search($query, $lang = 'en', int $limit = 10)
+  public function search(string $query, string $lang = 'en', int $limit = 10) : Collection
   {
     $client = new ApiClient();
 
@@ -47,7 +48,7 @@ class Wikidata
    *
    * @return \Illuminate\Support\Collection Return collection of \Wikidata\SearchResult
    */
-  public function searchBy($property, $value = null, $lang = 'en', int $limit = 10)
+  public function searchBy(string $property, string $value = '', $lang = 'en', int $limit = 10) : Collection
   {
     if (!is_pid($property)) {
       throw new Exception("First argument in searchBy() must be a valid Wikidata property ID (e.g.: P646).", 1);
